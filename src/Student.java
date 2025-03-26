@@ -7,8 +7,8 @@ public class Student {
     public String index;
     public String email;
     public String address;
-    public List<Double> grades = new ArrayList<>();
-    public Student(String fname, String lname, String index, String email, String address, double grades) {
+    public ArrayList<Double> grades;
+    public Student(String fname, String lname, String index, String email, String address) {
         this.fname = fname;
         this.lname = lname;
         this.index = index;
@@ -25,17 +25,19 @@ public class Student {
     }
     public void wyswietl() {
         System.out.println(fname + " " + lname);
-        System.out.println(index + " " + email + " " + address + " " + grades);
 
     }
    public double getAverageGrade() {
+        if(grades.isEmpty())
+        {
+            throw new IllegalArgumentException("Uczen nie ma zadnych ocen");
+        }
         double sum = 0;
         for (double grade : grades) {
             sum += grade;
-
         }
-        double average = sum / grades.size();
-        return average;
+        double average = (sum / grades.size());
+        return Math.round(average * 2) / 2.0;
     }
 
 }
